@@ -16,15 +16,17 @@ const apiId = parseInt((_a = process.env.TG_API_ID) !== null && _a !== void 0 ? 
 const apiHash = (_b = process.env.TG_API_HASH) !== null && _b !== void 0 ? _b : "";
 const sessionString = (_c = process.env.TG_SESSION) !== null && _c !== void 0 ? _c : "";
 const recipientId = (_d = process.env.TG_RECIPIENT_ID) !== null && _d !== void 0 ? _d : "";
-const messageText = (_e = process.env.TG_MESSAGE) !== null && _e !== void 0 ? _e : "";
-if (!apiId || !apiHash || !sessionString || !recipientId || !messageText) {
+const messagesRaw = (_e = process.env.TG_MESSAGE) !== null && _e !== void 0 ? _e : "";
+if (!apiId || !apiHash || !sessionString || !recipientId || !messagesRaw) {
     console.error("Missing required env vars: TG_API_ID, TG_API_HASH, TG_SESSION, TG_RECIPIENT_ID, TG_MESSAGE");
     process.exit(1);
 }
+const messages = messagesRaw.split("\n").map((l) => l.trim()).filter(Boolean);
+const messageText = messages[Math.floor(Math.random() * messages.length)];
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const client = new telegram_1.TelegramClient(new sessions_1.StringSession(sessionString), apiId, apiHash, { connectionRetries: 3 });
     yield client.connect();
     yield client.sendMessage(recipientId, { message: messageText });
-    console.log(`Message sent to ${recipientId}`);
+    console.log(`Sent to ${recipientId}: "${messageText}"`);
     yield client.disconnect();
 }))();
