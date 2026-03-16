@@ -23,5 +23,5 @@ jobs:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION: ${{ secrets.TG_SESSION }}
-          TG_RECIPIENT_ID: ${{ secrets.TG_RECIPIENT_ID }}
-          TG_MESSAGE: ${{ secrets.TG_MESSAGE }}
+          TG_RECIPIENT_ID: ${{ vars.TG_RECIPIENT_ID }}
+          TG_MESSAGE: ${{ vars.TG_MESSAGE }}
