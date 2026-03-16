@@ -1,0 +1,19 @@
+{
+  "name": "tg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "send": "npm run build && node dist/index.js",
+    "gen-session": "npx ts-node src/gen-session.ts"
+  },
+  "dependencies": {
+    "telegram": "^2.26.22"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
