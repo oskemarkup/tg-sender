@@ -1,6 +1,8 @@
 name: Send Telegram Message
 
 on:
+  schedule:
+    - cron: "0 8 * * *" # 11:00 MSK (UTC+3)
   workflow_dispatch:
 
 jobs:
