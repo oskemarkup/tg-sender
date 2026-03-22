@@ -23,7 +23,8 @@ jobs:
           DELIM=$(openssl rand -hex 16)
           {
             echo "TG_MESSAGE<<$DELIM"
-            curl -s "${{ vars.TG_MESSAGES_GIST_URL }}"
+            curl -s "${{ vars.TG_MESSAGES_GIST_URL }}" | tr -d '\r'
+            printf '\n'
             echo "$DELIM"
           } >> $GITHUB_ENV
 
