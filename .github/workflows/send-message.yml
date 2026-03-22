@@ -20,10 +20,11 @@ jobs:
 
       - name: Fetch messages
         run: |
+          DELIM=$(openssl rand -hex 16)
           {
-            echo 'TG_MESSAGE<<EOF'
+            echo "TG_MESSAGE<<$DELIM"
             curl -s "${{ vars.TG_MESSAGES_GIST_URL }}"
-            echo EOF
+            echo "$DELIM"
           } >> $GITHUB_ENV
 
       - run: npm run send
