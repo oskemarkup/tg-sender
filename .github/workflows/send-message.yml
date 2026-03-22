@@ -18,10 +18,17 @@ jobs:
 
       - run: npm ci
 
+      - name: Fetch messages
+        run: |
+          {
+            echo 'TG_MESSAGE<<EOF'
+            curl -s "${{ vars.TG_MESSAGES_GIST_URL }}"
+            echo EOF
+          } >> $GITHUB_ENV
+
       - run: npm run send
         env:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION: ${{ secrets.TG_SESSION }}
           TG_RECIPIENT_ID: ${{ vars.TG_RECIPIENT_ID }}
-          TG_MESSAGE: ${{ vars.TG_MESSAGE }}
